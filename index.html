@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atish Mukhopadhyay — Sarode Maestro & Music Educator</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+        playfair: ['Playfair Display', 'serif'],
+        script: ['Great Vibes', 'cursive'],
+      }
+    }
+  }
+}
+</script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#fafaf8;color:#1a1a1a;overflow-x:hidden}
+
+  .wave-bar{animation:waveA 1.2s ease-in-out infinite}
+  @keyframes waveA{0%,100%{height:6px}50%{height:22px}}
+
+  .note-particle{position:absolute;opacity:0;animation:noteF 5s ease-out forwards}
+  @keyframes noteF{
+    0%{opacity:0;transform:translateY(0) scale(.5) rotate(0)}
+    15%{opacity:.4}
+    100%{opacity:0;transform:translateY(-180px) scale(1.1) rotate(300deg)}
+  }
+
+  .reveal{opacity:0;transform:translateY(28px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  .read-more-content{max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.16,1,.3,1)}
+  .read-more-content.open{max-height:2000px}
+
+  html{scroll-behavior:smooth}
+  ::-webkit-scrollbar{width:5px}
+  ::-webkit-scrollbar-track{background:#f0efe8}
+  ::-webkit-scrollbar-thumb{background:#047857;border-radius:3px}
+  ::-webkit-scrollbar-thumb:hover{background:#059669}
+
+  .nav-glass{background:rgba(250,250,248,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+
+  .sitar-string{position:absolute;width:1px;height:100%;background:linear-gradient(to bottom,transparent,rgba(4,120,87,.08),transparent)}
+  .string-vib{animation:strVib 2.5s ease-in-out infinite}
+  @keyframes strVib{
+    0%,100%{transform:scaleX(1) translateY(0)}
+    15%{transform:scaleX(1.003) translateY(-.4px)}
+    30%{transform:scaleX(.997) translateY(.4px)}
+    60%{transform:scaleX(.999) translateY(.2px)}
+  }
+
+  .section-pad{padding:80px 24px}
+  @media(min-width:768px){.section-pad{padding:120px 48px}}
+  @media(min-width:1024px){.section-pad{padding:140px 64px}}
+
+  .tag{display:inline-block;font-size:10px;padding:4px 12px;border-radius:9999px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+
+  .glow-dot{animation:gDot 3s ease-in-out infinite}
+  @keyframes gDot{0%,100%{box-shadow:0 0 8px rgba(4,120,87,.3)}50%{box-shadow:0 0 18px rgba(4,120,87,.5)}}
+
+  .educator-step{transition:all .3s ease}
+  .educator-step:hover{background:#f0fdf4;transform:translateY(-2px);box-shadow:0 8px 24px rgba(4,120,87,.06)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-glass fixed top-0 w-full z-50 border-b border-emerald-900/5">
+  <div class="max-w-6xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3 group">
+      <div class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-playfair font-bold text-sm group-hover:scale-105 transition-transform duration-300">A</div>
+      <span class="font-playfair text-lg text-gray-900 tracking-tight hidden sm:inline">Atish Mukhopadhyay</span>
+    </a>
+    <div class="hidden lg:flex items-center gap-7">
+      <a href="#about" class="text-[13px] text-gray-500 hover:text-emerald-700 transition-colors duration-200 font-medium">About</a>
+      <a href="#statement" class="text-[13px] text-gray-500 hover:text-emerald-700 transition-colors duration-200 font-medium">Statement</a>
+      <a href="#process" class="text-[13px] text-gray-500 hover:text-emerald-700 transition-colors duration-200 font-medium">Process</a>
+      <a href="#gallery" class="text-[13px] text-gray-500 hover:text-emerald-700 transition-colors duration-200 font-medium">Gallery</a>
+      <a href="#contact" class="bg-emerald-700 hover:bg-emerald-600 text-white text-[13px] font-medium px-5 py-2.5 rounded-full transition-all duration-300 hover:shadow-[0_0_24px_rgba(4,120,87,.2)]">Get in Touch</a>
+    </div>
+    <button id="mobileMenuBtn" class="lg:hidden text-gray-700"><i data-lucide="menu" class="w-5 h-5"></i></button>
+  </div>
+  <div id="mobileMenu" class="hidden lg:hidden px-5 pb-5 space-y-3 border-t border-gray-100 mt-2 pt-4">
+    <a href="#about" class="block text-gray-500 hover:text-emerald-700 py-1.5 text-sm">About</a>
+    <a href="#statement" class="block text-gray-500 hover:text-emerald-700 py-1.5 text-sm">Statement</a>
+    <a href="#process" class="block text-gray-500 hover:text-emerald-700 py-1.5 text-sm">Process</a>
+    <a href="#gallery" class="block text-gray-500 hover:text-emerald-700 py-1.5 text-sm">Gallery</a>
+    <a href="#contact" class="block bg-emerald-700 text-white text-center py-3 rounded-full text-sm mt-2">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-16">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-[20%] left-[15%] w-[500px] h-[500px] bg-emerald-100/60 rounded-full blur-[100px]"></div>
+    <div class="absolute bottom-[20%] right-[10%] w-[400px] h-[400px] bg-amber-100/40 rounded-full blur-[80px]"></div>
+    <div class="sitar-string string-vib" style="left:18%;animation-delay:0s"></div>
+    <div class="sitar-string string-vib" style="left:32%;animation-delay:.4s"></div>
+    <div class="sitar-string string-vib" style="left:50%;animation-delay:.8s"></div>
+    <div class="sitar-string string-vib" style="left:68%;animation-delay:1.2s"></div>
+    <div class="sitar-string string-vib" style="left:82%;animation-delay:1.6s"></div>
+  </div>
+  <div id="noteContainer" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+    <p class="font-script text-emerald-700 text-2xl md:text-3xl mb-5">Bridging Cultures Through Music</p>
+    <h1 class="font-playfair text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-gray-900 tracking-tight leading-[1.05] mb-5">
+      ATISH<br><span class="bg-gradient-to-r from-emerald-700 via-emerald-600 to-amber-600 bg-clip-text text-transparent">MUKHOPADHYAY</span>
+    </h1>
+    <p class="text-gray-500 text-base md:text-lg max-w-2xl mx-auto mb-5 font-light leading-relaxed">
+      Performing Musician & Music Educator — Sarode Exponent of the<br class="hidden sm:block"> Maihar Seniya Gharana
+    </p>
+    <div class="flex items-center justify-center gap-2 mb-10">
+      <div class="flex gap-[3px]">
+        <div class="wave-bar w-[3px] bg-emerald-600 rounded-full" style="animation-delay:0s"></div>
+        <div class="wave-bar w-[3px] bg-emerald-500 rounded-full" style="animation-delay:.1s"></div>
+        <div class="wave-bar w-[3px] bg-emerald-600 rounded-full" style="animation-delay:.2s"></div>
+        <div class="wave-bar w-[3px] bg-emerald-500 rounded-full" style="animation-delay:.3s"></div>
+        <div class="wave-bar w-[3px] bg-amber-500 rounded-full" style="animation-delay:.4s"></div>
+        <div class="wave-bar w-[3px] bg-amber-400 rounded-full" style="animation-delay:.5s"></div>
+        <div class="wave-bar w-[3px] bg-emerald-600 rounded-full" style="animation-delay:.6s"></div>
+      </div>
+      <span class="text-[10px] text-emerald-700 ml-2 tracking-[.18em] uppercase font-semibold">600+ Concerts Worldwide</span>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="#about" class="group bg-emerald-700 hover:bg-emerald-600 text-white font-medium px-7 py-3.5 rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(4,120,87,.2)] flex items-center justify-center gap-2 text-sm">
+        Explore My Work <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform"></i>
+      </a>
+      <a href="#contact" class="group border border-gray-300 hover:border-emerald-600 text-gray-700 hover:text-emerald-700 font-medium px-7 py-3.5 rounded-full transition-all duration-300 hover:bg-emerald-50 flex items-center justify-center gap-2 text-sm">
+        <i data-lucide="calendar" class="w-4 h-4"></i> Book a Concert
+      </a>
+    </div>
+  </div>
+
+  <div class="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 animate-bounce">
+    <span class="text-[9px] text-gray-400 tracking-[.2em] uppercase font-medium">Scroll</span>
+    <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-emerald-600"></i>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section-pad bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="reveal">
+        <div class="relative rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,.07)]">
+          <img src="https://picsum.photos/seed/indian-musician-performing-sarod/600/800.jpg" alt="Atish Mukhopadhyay performing with Sarode" class="w-full h-[420px] md:h-[540px] object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <div class="absolute bottom-5 left-5 right-5">
+            <div class="flex items-center gap-2.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
+              <span class="text-xs text-white/90 font-medium">Based in Toronto, Canada</span>
+            </div>
+          </div>
+          <div class="absolute top-5 right-5 bg-emerald-700 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">
+            40 Years of Training
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay:.12s">
+        <p class="font-script text-emerald-700 text-xl mb-2">About the Artist</p>
+        <h2 class="font-playfair text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-gray-900 mb-6 tracking-tight leading-tight">Sarode Exponent of the<br><span class="text-emerald-700">Maihar Seniya Gharana</span></h2>
+
+        <div class="text-gray-600 text-[15px] leading-[1.8] space-y-4">
+          <p>I am an India-born Sarode player and music educator carrying the legacy of the Maihar Seniya Gharana, one of the most revered lineages in North Indian Classical music, rooted in the 16th century. I received nearly 40 years of rigorous training in the traditional Guru-Shishya Parampara, under the guidance of world-renowned masters.</p>
+          <div id="bioMore" class="read-more-content">
+            <p>This immersive process shaped me both technically and aesthetically, and continues to guide my musical and teaching philosophy.</p>
+            <p>As an educator, I have taught a wide range of North Indian classical instruments, along with North Indian Classical Vocal Music. I have also mentored students who play non-Indian instruments such as Violin, Cello, Guitar, and Oud, helping them apply North Indian classical language to their own musical backgrounds. This versatility allows me to connect with students across cultures.</p>
+            <p>In 2012, I was invited to the Tchaikovsky Conservatory in Moscow, where I launched and led a regular North Indian Classical Music course for over a decade. On its 10th anniversary, I received the Nikolai Rubinstein Medal. I also co-founded the Aashish Khan School of World Music in India, serving as curriculum developer and teacher for nearly ten years.</p>
+            <p>I have taught students of all ages and cultural backgrounds for over 20 years, both privately and in institutions. My lecture-demonstrations include York University, University of Pennsylvania, and The Royal Conservatory of Music.</p>
+            <p>As a performer, I've played over 600 Sarode concerts and international music festivals worldwide, including collaborations with Grammy-nominated musicians. One of my works was selected by the National Gallery Prague for their permanent exhibition "Art of Asia" (2025).</p>
+            <p>I also volunteered for the EU-funded "Children of War: Invisible Wounds" project in Ukraine, conducting webinars and distributing a Sarode CD to aid traumatized children in war zones.</p>
+          </div>
+        </div>
+
+        <button onclick="toggleReadMore('bioMore',this)" class="mt-5 text-emerald-700 text-sm font-semibold flex items-center gap-1.5 hover:gap-2.5 transition-all duration-300 group">
+          <span>Read More</span> <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        </button>
+
+        <div class="grid grid-cols-3 gap-4 mt-8">
+          <div class="bg-gray-50 border border-gray-100 rounded-2xl p-4 md:p-5 text-center shadow-sm">
+            <p class="font-playfair text-2xl md:text-3xl font-bold text-emerald-700 mb-0.5">600+</p>
+            <p class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Concerts</p>
+          </div>
+          <div class="bg-gray-50 border border-gray-100 rounded-2xl p-4 md:p-5 text-center shadow-sm">
+            <p class="font-playfair text-2xl md:text-3xl font-bold text-emerald-700 mb-0.5">20+</p>
+            <p class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Years Teaching</p>
+          </div>
+          <div class="bg-gray-50 border border-gray-100 rounded-2xl p-4 md:p-5 text-center shadow-sm">
+            <p class="font-playfair text-2xl md:text-3xl font-bold text-emerald-700 mb-0.5">40+</p>
+            <p class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Yrs Training</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTIST STATEMENT -->
+<section id="statement" class="section-pad bg-[#f5f4ef]">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <p class="font-script text-emerald-700 text-xl mb-2">From the Heart</p>
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Artist Statement</h2>
+    </div>
+    <div class="reveal" style="transition-delay:.1s">
+      <div class="bg-white rounded-3xl p-8 md:p-12 shadow-[0_4px_30px_rgba(0,0,0,.04)] border border-gray-100 relative">
+        <div class="absolute top-4 left-6 font-playfair text-7xl text-emerald-100 leading-none select-none">"</div>
+        <div class="relative z-10 text-gray-600 text-[15px] leading-[1.8] space-y-4">
+          <p>As a lifelong student of music, I view North Indian Classical Music not only as an art form, but as a living, evolving language—one that carries centuries of knowledge, emotion, and spiritual depth. My practice as a Sarode player and educator is rooted in the belief that true music has the power to transform, connect, and heal.</p>
+          <div id="statementMore" class="read-more-content">
+            <p>Having trained for nearly four decades in the Guru-Shishya Parampara, I have inherited a musical discipline that demands both precision and surrender. But beyond its technical rigor, this tradition has shaped how I approach teaching—with respect for each learner's voice, pace, and cultural context. Whether guiding a student on Sarode or helping a non-Indian instrumentalist translate Indian melodic ideas to the Violin, Cello, or Guitar, my goal is to keep the tradition alive and grow without enclosing it.</p>
+            <p>The music I perform is almost entirely improvisational—crafted in the moment through deep listening, inner feeling, and subtle responsiveness to time, space, and mood. I explore Raag and rhythm not just as formal structures, but as emotional landscapes, capable of evoking memory, stillness, and release. These values extend into my work as an educator, where I design immersive experiences that engage not just the intellect, but the senses and the self.</p>
+            <p>Collaboration also plays an essential role in my practice. From working with Grammy-nominated artists to volunteering in the "Children of War: Invisible Wounds" project in Ukraine, I have seen how music can cross borders and serve as a tool for empathy, cultural exchange, and healing.</p>
+            <p>Now based in Toronto, I continue to perform, teach, and share this tradition with audiences and students—helping them not just to hear the music, but to feel it deeply.</p>
+          </div>
+        </div>
+        <button onclick="toggleReadMore('statementMore',this)" class="mt-6 text-emerald-700 text-sm font-semibold flex items-center gap-1.5 hover:gap-2.5 transition-all duration-300 group">
+          <span>Read More</span> <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY / TIMELINE -->
+<section class="section-pad bg-white">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <p class="font-script text-emerald-700 text-xl mb-2">My Path</p>
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">The Journey</h2>
+    </div>
+    <div class="relative">
+      <div class="absolute left-5 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500/40 via-emerald-200 to-transparent md:-translate-x-px"></div>
+
+      <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4 mb-14 reveal">
+        <div class="md:w-1/2 md:text-right md:pr-10 pl-14 md:pl-0">
+          <span class="tag bg-emerald-50 text-emerald-700">Early Years</span>
+          <h3 class="font-playfair text-lg text-gray-900 font-semibold mt-2">Guru-Shishya Parampara</h3>
+          <p class="text-gray-500 text-sm mt-1.5 leading-relaxed">Nearly 40 years of rigorous training under world-renowned masters in the Maihar Seniya Gharana tradition.</p>
+        </div>
+        <div class="absolute left-3.5 md:left-1/2 md:-translate-x-1/2 w-3.5 h-3.5 rounded-full bg-emerald-600 border-[3px] border-white shadow-sm z-10 glow-dot"></div>
+        <div class="md:w-1/2 md:pl-10"></div>
+      </div>
+
+      <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4 mb-14 reveal" style="transition-delay:.08s">
+        <div class="md:w-1/2 md:pr-10"></div>
+        <div class="absolute left-3.5 md:left-1/2 md:-translate-x-1/2 w-3.5 h-3.5 rounded-full bg-emerald-600 border-[3px] border-white shadow-sm z-10"></div>
+        <div class="md:w-1/2 md:pl-10 pl-14">
+          <span class="tag bg-emerald-50 text-emerald-700">India</span>
+          <h3 class="font-playfair text-lg text-gray-900 font-semibold mt-2">Aashish Khan School of World Music</h3>
+          <p class="text-gray-500 text-sm mt-1.5 leading-relaxed">Co-founded the school, serving as curriculum developer and teacher for nearly ten years.</p>
+        </div>
+      </div>
+
+      <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4 mb-14 reveal" style="transition-delay:.16s">
+        <div class="md:w-1/2 md:text-right md:pr-10 pl-14 md:pl-0">
+          <span class="tag bg-amber-50 text-amber-700">2012 – 2023</span>
+          <h3 class="font-playfair text-lg text-gray-900 font-semibold mt-2">Tchaikovsky Conservatory, Moscow</h3>
+          <p class="text-gray-500 text-sm mt-1.5 leading-relaxed">Invited to launch and lead a regular North Indian Classical Music course for over a decade. Received the Nikolai Rubinstein Medal on the 10th anniversary.</p>
+        </div>
+        <div class="absolute left-3.5 md:left-1/2 md:-translate-x-1/2 w-3.5 h-3.5 rounded-full bg-amber-500 border-[3px] border-white shadow-sm z-10"></div>
+        <div class="md:w-1/2 md:pl-10"></div>
+      </div>
+
+      <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4 mb-14 reveal" style="transition-delay:.24s">
+        <div class="md:w-1/2 md:pr-10"></div>
+        <div class="absolute left-3.5 md:left-1/2 md:-translate-x-1/2 w-3.5 h-3.5 rounded-full bg-emerald-600 border-[3px] border-white shadow-sm z-10"></div>
+        <div class="md:w-1/2 md:pl-10 pl-14">
+          <span class="tag bg-emerald-50 text-emerald-700">Ongoing</span>
+          <h3 class="font-playfair text-lg text-gray-900 font-semibold mt-2">600+ International Concerts</h3>
+          <p class="text-gray-500 text-sm mt-1.5 leading-relaxed">Performed at international music festivals worldwide, including collaborations with Grammy-nominated musicians.</p>
+        </div>
+      </div>
+
+      <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4 mb-14 reveal" style="transition-delay:.32s">
+        <div class="md:w-1/2 md:text-right md:pr-10 pl-14 md:pl-0">
+          <span class="tag bg-rose-50 text-rose-700">Ukraine</span>
+          <h3 class="font-playfair text-lg text-gray-900 font-semibold mt-2">Children of War: Invisible Wounds</h3>
+          <p class="text-gray-500 text-sm mt-1.5 leading-relaxed">Volunteered for EU-funded project — conducted webinars and distributed Sarode CDs to aid traumatized children in war zones.</p>
+        </div>
+        <div class="absolute left-3.5 md:left-1/2 md:-translate-x-1/2 w-3.5 h-3.5 rounded-full bg-rose-500 border-[3px] border-white shadow-sm z-10"></div>
+        <div class="md:w-1/2 md:pl-10"></div>
+      </div>
+
+      <div class="relative flex flex-col md:flex-row items-start md:items-center gap-4 reveal" style="transition-delay:.4s">
+        <div class="md:w-1/2 md:pr-10"></div>
+        <div class="absolute left-3.5 md:left-1/2 md:-translate-x-1/2 w-3.5 h-3.5 rounded-full bg-emerald-600 border-[3px] border-white shadow-sm z-10 glow-dot"></div>
+        <div class="md:w-1/2 md:pl-10 pl-14">
+          <span class="tag bg-emerald-50 text-emerald-700">2025</span>
+          <h3 class="font-playfair text-lg text-gray-900 font-semibold mt-2">National Gallery Prague — "Art of Asia"</h3>
+          <p class="text-gray-500 text-sm mt-1.5 leading-relaxed">Work selected for permanent exhibition. Now based in Toronto, continuing to perform, teach, and build cultural bridges.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREATIVE PROCESS — PERFORMER -->
+<section id="process" class="section-pad bg-[#f5f4ef]">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <p class="font-script text-emerald-700 text-xl mb-2">Behind the Music</p>
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Creative Process — Performer</h2>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 md:p-12 shadow-[0_4px_30px_rgba(0,0,0,.04)] border border-gray-100 reveal" style="transition-delay:.1s">
+      <p class="text-gray-500 text-sm leading-relaxed mb-8 italic">"Daily practice is woven into my life. I usually spend 3 to 4 hours with my Sarode, and at least an hour listening to recordings of my Gurus. These two practices feel like breath and heartbeat — they ground me, nourish my inner world, and keep the creative energy flowing."</p>
+
+      <div class="space-y-6">
+        <div class="flex gap-5 items-start">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-700 font-playfair font-bold text-sm">1</div>
+          <div>
+            <h4 class="font-playfair text-base text-gray-900 font-semibold">Mental Preparation</h4>
+            <p class="text-gray-500 text-sm mt-1 leading-relaxed">My preparation begins a day before. I attune myself to the time of day, the emotional atmosphere of the venue, the expected audience, and my own inner state. I begin imagining a few Raags that may suit the occasion.</p>
+          </div>
+        </div>
+        <div class="flex gap-5 items-start">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-700 font-playfair font-bold text-sm">2</div>
+          <div>
+            <h4 class="font-playfair text-base text-gray-900 font-semibold">Choosing the Raag</h4>
+            <p class="text-gray-500 text-sm mt-1 leading-relaxed">I choose a Raag based on the kind of mood or spiritual space I want to create. If the audience is new to North Indian classical music, I may select a Raag that is melodically rich but easy to absorb. If it's a musically informed audience, I may explore something deeper or more intricate.</p>
+          </div>
+        </div>
+        <div class="flex gap-5 items-start">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-700 font-playfair font-bold text-sm">3</div>
+          <div>
+            <h4 class="font-playfair text-base text-gray-900 font-semibold">Tuning and Centering</h4>
+            <p class="text-gray-500 text-sm mt-1 leading-relaxed">I tune my Sarode slowly and carefully. I sit with the Tanpura or in silence to centre myself. This is the moment when the outer world starts to fade and the inner space begins to open.</p>
+          </div>
+        </div>
+        <div id="processPerfMore" class="read-more-content">
+          <div class="flex gap-5 items-start">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-700 font-playfair font-bold text-sm">4</div>
+            <div>
+              <h4 class="font-playfair text-base text-gray-900 font-semibold">Beginning with Alaap</h4>
+              <p class="text-gray-500 text-sm mt-1 leading-relaxed">The performance begins with the Alaap — a slow, unmetered unfolding of the Raag. Nothing is pre-planned. I stay within the Raag's grammar but listen deeply to what wants to emerge in that moment.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 items-start mt-6">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-700 font-playfair font-bold text-sm">5</div>
+            <div>
+              <h4 class="font-playfair text-base text-gray-900 font-semibold">Moving into Jod and Jhala</h4>
+              <p class="text-gray-500 text-sm mt-1 leading-relaxed">As energy builds, I move into Jod (with a steady pulse) and then Jhala (fast and rhythmic). These transitions happen naturally. Years of practice allow me to improvise freely while holding the structure in my body.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 items-start mt-6">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-700 font-playfair font-bold text-sm">6</div>
+            <div>
+              <h4 class="font-playfair text-base text-gray-900 font-semibold">Composition with Tabla</h4>
+              <p class="text-gray-500 text-sm mt-1 leading-relaxed">I conclude the performance with one or more compositions set to different rhythmic cycles, accompanied by Tabla. Even within these fixed compositions, the space for improvisation remains vast. The concert ends when I feel that the emotional or spiritual journey is complete.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="toggleReadMore('processPerfMore',this)" class="mt-7 text-emerald-700 text-sm font-semibold flex items-center gap-1.5 hover:gap-2.5 transition-all duration-300 group">
+        <span>Read More</span> <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- CREATIVE PROCESS — EDUCATOR (REDESIGNED) -->
+<section class="section-pad bg-white">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <p class="font-script text-emerald-700 text-xl mb-2">Teaching Philosophy</p>
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Creative Process — Educator</h2>
+      <p class="text-gray-500 text-sm mt-3 max-w-lg mx-auto">A six-step approach refined over 20+ years of teaching across cultures, instruments, and conservatories.</p>
+    </div>
+
+    <!-- Vertical Connected Steps -->
+    <div class="max-w-3xl mx-auto">
+      <!-- Step 1 -->
+      <div class="educator-step reveal rounded-2xl border border-gray-100 bg-white p-6 md:p-8 mb-4 cursor-default">
+        <div class="flex items-start gap-5">
+          <div class="flex-shrink-0">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center font-playfair font-bold text-lg shadow-sm">1</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-playfair text-lg text-gray-900 font-semibold mb-1.5">Getting to Know the Student</h4>
+            <p class="text-gray-500 text-sm leading-relaxed">I begin by understanding the student's background — their musical exposure, cultural context, and the instrument they've chosen. Whether it's Sarode, Sitar, Rabab, Esraj, Dilruba, voice, or a non-Indian instrument like Violin or Guitar, I approach each with curiosity and care, knowing that every instrument carries its own way of speaking.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connector -->
+      <div class="flex justify-center my-1 reveal"><div class="w-px h-6 bg-emerald-200"></div></div>
+
+      <!-- Step 2 -->
+      <div class="educator-step reveal rounded-2xl border border-gray-100 bg-white p-6 md:p-8 mb-4 cursor-default" style="transition-delay:.06s">
+        <div class="flex items-start gap-5">
+          <div class="flex-shrink-0">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center font-playfair font-bold text-lg shadow-sm">2</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-playfair text-lg text-gray-900 font-semibold mb-1.5">Creating a Personal Learning Path</h4>
+            <p class="text-gray-500 text-sm leading-relaxed">Once I have a sense of who the student is, I set a long-term goal (6 to 12 months) and break it down into small, clear steps. Whether I'm teaching in a conservatory setting or one-on-one, I build a structured yet flexible lesson plan that blends technique, theory, and fixed compositions — all tailored to the instrument and the student's pace.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center my-1 reveal"><div class="w-px h-6 bg-emerald-200"></div></div>
+
+      <!-- Step 3 -->
+      <div class="educator-step reveal rounded-2xl border border-gray-100 bg-white p-6 md:p-8 mb-4 cursor-default" style="transition-delay:.12s">
+        <div class="flex items-start gap-5">
+          <div class="flex-shrink-0">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center font-playfair font-bold text-lg shadow-sm">3</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-playfair text-lg text-gray-900 font-semibold mb-1.5">Building the Foundation</h4>
+            <p class="text-gray-500 text-sm leading-relaxed">This is where we focus on the fundamentals — Raag, Taal, ornamentation, and carefully chosen practice materials. I make sure students receive written notations, recordings, and clear explanations. These are the building blocks of their musical language.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center my-1 reveal"><div class="w-px h-6 bg-emerald-200"></div></div>
+
+      <!-- Step 4 -->
+      <div class="educator-step reveal rounded-2xl border border-gray-100 bg-white p-6 md:p-8 mb-4 cursor-default" style="transition-delay:.18s">
+        <div class="flex items-start gap-5">
+          <div class="flex-shrink-0">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center font-playfair font-bold text-lg shadow-sm">4</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-playfair text-lg text-gray-900 font-semibold mb-1.5">Supporting Progress</h4>
+            <p class="text-gray-500 text-sm leading-relaxed">I keep a close eye on each student's development and adapt the material as needed. Corrections are gentle and thoughtful. I want students to feel supported, not judged — the goal is steady growth, not perfection.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center my-1 reveal"><div class="w-px h-6 bg-emerald-200"></div></div>
+
+      <!-- Step 5 -->
+      <div class="educator-step reveal rounded-2xl border border-gray-100 bg-white p-6 md:p-8 mb-4 cursor-default" style="transition-delay:.24s">
+        <div class="flex items-start gap-5">
+          <div class="flex-shrink-0">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center font-playfair font-bold text-lg shadow-sm">5</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-playfair text-lg text-gray-900 font-semibold mb-1.5">Introducing Improvisation</h4>
+            <p class="text-gray-500 text-sm leading-relaxed">Once students have a solid base, usually after 1–2 years, we begin exploring improvisation. I guide them slowly — offering examples and encouraging them to experiment with their own musical ideas. Improvisation, like meditation, can't be forced — only nurtured.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center my-1 reveal"><div class="w-px h-6 bg-emerald-200"></div></div>
+
+      <!-- Step 6 -->
+      <div class="educator-step reveal rounded-2xl border border-gray-100 bg-white p-6 md:p-8 cursor-default" style="transition-delay:.3s">
+        <div class="flex items-start gap-5">
+          <div class="flex-shrink-0">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center font-playfair font-bold text-lg shadow-sm">6</div>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-playfair text-lg text-gray-900 font-semibold mb-1.5">Sharing and Reflecting</h4>
+            <p class="text-gray-500 text-sm leading-relaxed">I regularly organize performance opportunities, whether formal report concerts or informal class sharings. These are moments for students to express, reflect, and grow. Afterward, I reflect too — always looking for ways to improve my approach and stay responsive to each student's journey.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section-pad bg-[#f5f4ef]">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <p class="font-script text-emerald-700 text-xl mb-2">Captured Moments</p>
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Gallery</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+      <div class="rounded-2xl overflow-hidden border border-gray-200 group relative shadow-sm reveal">
+        <img src="https://picsum.photos/seed/sarode-concert-perf/500/600.jpg" alt="Concert" class="w-full h-44 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <span class="text-sm text-white font-medium">International Concert</span>
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-gray-200 group relative shadow-sm md:mt-8 reveal" style="transition-delay:.08s">
+        <img src="https://picsum.photos/seed/sarode-instrument-close/500/600.jpg" alt="Sarode" class="w-full h-44 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <span class="text-sm text-white font-medium">The Sarode</span>
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-gray-200 group relative shadow-sm reveal" style="transition-delay:.16s">
+        <img src="https://picsum.photos/seed/indian-classical-stage-2/500/600.jpg" alt="Performance" class="w-full h-44 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <span class="text-sm text-white font-medium">Raga Exploration</span>
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-gray-200 group relative shadow-sm md:mt-8 reveal" style="transition-delay:.24s">
+        <img src="https://picsum.photos/seed/tchaikovsky-moscow-hall/500/600.jpg" alt="Moscow" class="w-full h-44 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <span class="text-sm text-white font-medium">Tchaikovsky Conservatory</span>
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-gray-200 group relative shadow-sm reveal" style="transition-delay:.32s">
+        <img src="https://picsum.photos/seed/music-teaching-class/500/600.jpg" alt="Teaching" class="w-full h-44 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <span class="text-sm text-white font-medium">Teaching Session</span>
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-gray-200 group relative shadow-sm md:mt-8 reveal" style="transition-delay:.4s">
+        <img src="https://picsum.photos/seed/world-music-festival-3/500/600.jpg" alt="Festival" class="w-full h-44 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <span class="text-sm text-white font-medium">World Music Festival</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="section-pad bg-white">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <p class="font-script text-emerald-700 text-xl mb-2">Recognition</p>
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Highlights</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="group rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 reveal">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/rubinstein-medal-gold/400/280.jpg" alt="Medal" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="font-playfair text-base text-white font-semibold">Nikolai Rubinstein Medal</h3>
+            <p class="text-emerald-300 text-xs mt-0.5">Tchaikovsky Conservatory</p>
+          </div>
+        </div>
+        <div class="p-5">
+          <p class="text-gray-500 text-sm leading-relaxed">Awarded on the 10th anniversary of the North Indian Classical Music course at Moscow's Tchaikovsky Conservatory.</p>
+        </div>
+      </div>
+
+      <div class="group rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 reveal" style="transition-delay:.1s">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/prague-gallery-art-asia/400/280.jpg" alt="Prague" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="font-playfair text-base text-white font-semibold">National Gallery Prague</h3>
+            <p class="text-amber-300 text-xs mt-0.5">Permanent Exhibition</p>
+          </div>
+        </div>
+        <div class="p-5">
+          <p class="text-gray-500 text-sm leading-relaxed">Musical work selected for the permanent exhibition "Art of Asia" (2025) — a rare honour for a living musician.</p>
+        </div>
+      </div>
+
+      <div class="group rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 reveal sm:col-span-2 lg:col-span-1" style="transition-delay:.2s">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/children-peace-music/400/280.jpg" alt="Ukraine" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="font-playfair text-base text-white font-semibold">Children of War</h3>
+            <p class="text-rose-300 text-xs mt-0.5">EU-Funded Project, Ukraine</p>
+          </div>
+        </div>
+        <div class="p-5">
+          <p class="text-gray-500 text-sm leading-relaxed">Volunteered for "Children of War: Invisible Wounds" — conducting webinars and distributing Sarode CDs to aid traumatized children.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LECTURE DEMONSTRATIONS -->
+<section class="section-pad bg-[#f5f4ef]">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <p class="font-script text-emerald-700 text-xl mb-2">Academic Presence</p>
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Lecture-Demonstrations</h2>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-5 reveal" style="transition-delay:.1s">
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-center hover:shadow-md transition-shadow duration-300">
+        <div class="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="graduation-cap" class="w-6 h-6 text-emerald-700"></i>
+        </div>
+        <h4 class="font-playfair text-base text-gray-900 font-semibold">York University</h4>
+        <p class="text-gray-400 text-xs mt-1">Toronto, Canada</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-center hover:shadow-md transition-shadow duration-300">
+        <div class="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="graduation-cap" class="w-6 h-6 text-emerald-700"></i>
+        </div>
+        <h4 class="font-playfair text-base text-gray-900 font-semibold">University of Pennsylvania</h4>
+        <p class="text-gray-400 text-xs mt-1">Philadelphia, USA</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-center hover:shadow-md transition-shadow duration-300">
+        <div class="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="graduation-cap" class="w-6 h-6 text-emerald-700"></i>
+        </div>
+        <h4 class="font-playfair text-base text-gray-900 font-semibold">The Royal Conservatory</h4>
+        <p class="text-gray-400 text-xs mt-1">Toronto, Canada</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-pad bg-white">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <p class="font-script text-emerald-700 text-xl mb-2">Let's Connect</p>
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Bridging Cultures Through Music</h2>
+      <p class="text-gray-500 text-sm mt-4 max-w-xl mx-auto leading-relaxed">My journey with the Sarode and North Indian Classical Music is not only about preserving tradition — it's about creating connections across cultures, generations, and instruments. I welcome opportunities to perform, collaborate, teach, and share this evolving art form.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-10 reveal" style="transition-delay:.1s">
+      <div class="lg:col-span-2 space-y-5">
+        <a href="mailto:atish.sarod@gmail.com" class="flex items-start gap-4 group">
+          <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-100 transition-colors">
+            <i data-lucide="mail" class="w-[18px] h-[18px] text-emerald-700"></i>
+          </div>
+          <div>
+            <p class="text-gray-900 text-sm font-medium">Email</p>
+            <p class="text-gray-500 text-sm mt-0.5">atish.sarod@gmail.com</p>
+          </div>
+        </a>
+        <a href="https://sarodeatish.com/" target="_blank" class="flex items-start gap-4 group">
+          <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-100 transition-colors">
+            <i data-lucide="globe" class="w-[18px] h-[18px] text-emerald-700"></i>
+          </div>
+          <div>
+            <p class="text-gray-900 text-sm font-medium">Website</p>
+            <p class="text-emerald-700 text-sm mt-0.5">sarodeatish.com</p>
+          </div>
+        </a>
+        <div class="flex items-start gap-4">
+          <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="map-pin" class="w-[18px] h-[18px] text-emerald-700"></i>
+          </div>
+          <div>
+            <p class="text-gray-900 text-sm font-medium">Address</p>
+            <p class="text-gray-500 text-sm mt-0.5 leading-relaxed">312 - 1071 Don Mills Road,<br>North York, ON, M3C 1X5</p>
+          </div>
+        </div>
+
+        <div class="flex gap-2.5 pt-4">
+          <a href="#" class="w-9 h-9 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-500 hover:text-emerald-700 hover:border-emerald-300 hover:bg-emerald-50 transition-all duration-300">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-500 hover:text-emerald-700 hover:border-emerald-300 hover:bg-emerald-50 transition-all duration-300">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-500 hover:text-emerald-700 hover:border-emerald-300 hover:bg-emerald-50 transition-all duration-300">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <form class="lg:col-span-3 space-y-4" id="contactForm">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-1.5 block">Name</label>
+            <input type="text" placeholder="Your name" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all">
+          </div>
+          <div>
+            <label class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-1.5 block">Email</label>
+            <input type="email" placeholder="your@email.com" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all">
+          </div>
+        </div>
+        <div>
+          <label class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-1.5 block">Inquiry Type</label>
+          <select class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all appearance-none cursor-pointer">
+            <option value="">Select inquiry type</option>
+            <option value="concert">Concert / Festival</option>
+            <option value="collaboration">Collaboration</option>
+            <option value="teaching">Teaching / Workshop</option>
+            <option value="lecture">Lecture-Demonstration</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-1.5 block">Message</label>
+          <textarea rows="4" placeholder="Tell me about your project or event..." class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all resize-none"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-medium py-3.5 rounded-xl transition-all duration-300 hover:shadow-[0_0_24px_rgba(4,120,87,.2)] flex items-center justify-center gap-2 group text-sm">
+          <span>Send Message</span>
+          <i data-lucide="send" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        </button>
+        <div id="formMessage" class="hidden text-center text-sm py-2.5 rounded-xl"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-gray-100 py-10 px-6 bg-[#f5f4ef]">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2.5">
+      <div class="w-7 h-7 rounded-full bg-emerald-700 flex items-center justify-center text-white font-playfair font-bold text-[11px]">A</div>
+      <span class="font-playfair text-sm text-gray-700">Atish Mukhopadhyay</span>
+    </div>
+    <p class="text-gray-400 text-xs text-center">© 2025 Atish Mukhopadhyay. All rights reserved.</p>
+    <div class="flex gap-5">
+      <a href="#" class="text-gray-400 hover:text-emerald-700 text-[11px] uppercase tracking-wider font-medium transition-colors">Privacy</a>
+      <a href="#" class="text-gray-400 hover:text-emerald-700 text-[11px] uppercase tracking-wider font-medium transition-colors">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+
+function toggleReadMore(id, btn) {
+  const el = document.getElementById(id);
+  const span = btn.querySelector('span');
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    span.textContent = 'Read More';
+  } else {
+    el.classList.add('open');
+    span.textContent = 'Read Less';
+  }
+  lucide.createIcons();
+}
+
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+const nc = document.getElementById('noteContainer');
+const notes = ['♪','♫','♬','♩'];
+setInterval(() => {
+  const n = document.createElement('div');
+  n.className = 'note-particle';
+  n.textContent = notes[Math.floor(Math.random()*notes.length)];
+  n.style.left = Math.random()*100 + '%';
+  n.style.bottom = '8%';
+  n.style.color = Math.random()>.5 ? 'rgba(4,120,87,.2)' : 'rgba(180,140,20,.15)';
+  n.style.fontSize = (14 + Math.random()*14) + 'px';
+  n.style.animationDuration = (3+Math.random()*3) + 's';
+  nc.appendChild(n);
+  setTimeout(() => n.remove(), 6000);
+}, 2500);
+
+document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('hidden');
+});
+document.querySelectorAll('#mobileMenu a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'));
+});
+
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.style.borderBottomColor = window.scrollY > 50 ? 'rgba(4,120,87,.08)' : 'rgba(4,120,87,.03)';
+});
+
+document.getElementById('contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const m = document.getElementById('formMessage');
+  m.classList.remove('hidden');
+  m.className = 'text-center text-sm py-3 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200';
+  m.textContent = '✓ Thank you! Your message has been sent. Atish will get back to you soon.';
+  e.target.reset();
+  setTimeout(() => m.classList.add('hidden'), 5000);
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const t = document.querySelector(this.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
